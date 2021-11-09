@@ -31,6 +31,11 @@ public class MyApp {
 		System.out.println("9. Update employee profile");
 		System.out.println("10. Add employee with profile");
 
+		System.out.println("11. Delete profile");
+		System.out.println("12. Update profile");
+		System.out.println("13. View Profile By Id");
+		System.out.println("14. View All Profile");
+
 		int selectedOption = sc.nextInt();
 
 		switch (selectedOption) {
@@ -169,20 +174,65 @@ public class MyApp {
 			// initialize profile properties
 			profile2.setAge(age2);
 			profile2.setSalary(salary2);
-			
+
 			// set emp profile
 			emp2.setProfile(profile2);
-			
+
 			Employee result = empService.addEmployee(emp2);
-			System.out.println("Added new emp "+name2+ " successfully! ");
+			System.out.println("Added new emp " + name2 + " successfully! ");
 			System.out.println(result);
-			
-			
-			
 
 			break;
+
+		case 11:
+			System.out.println("Enter profile id: ");
+			int j = sc.nextInt();
+			profileService.deleteProfile(j);
+			System.out.println("Deleted profile with id " + j + " successfully!");
+
+			break;
+
+		case 12:
+			// get profile id
+			System.out.println("Enter profile Id ");
+			int pId = sc.nextInt();
+
+			// get profile name
+			System.out.println("Enter profile age: ");
+			int pAge = sc.nextInt();
+
+			// get profile salary
+			System.out.println("Enter profile salary: ");
+			double pSalary = sc.nextDouble();
+
+			// create profile object
+			Profile profil = new Profile(pId, pAge, pSalary);
+
+			// update profile
+			Profile updatedPro = profileService.updateProfile(pId, profil);
+			System.out.println(updatedPro);
+
+			break;
+			
+		case 13:
+			System.out.println("Enter profile id: ");
+			int pId1 = sc.nextInt();
+			Profile pro1 = profileService.getProfileById(pId1);
+			System.out.println(pro1);
+
+			break;
+
+		case 14:
+			List<Profile> proList = profileService.getAllProfiles();
+			Iterator<Profile> itr1 = proList.iterator();
+			while (itr1.hasNext()) {
+				System.out.println(itr1.next());
+			}
+
+			break;
+			
 		default:
-			System.out.println("Enter any number between 1 and 7");
+			System.out.println("Enter any number between 1 and 13");
 		}
 
 	}
